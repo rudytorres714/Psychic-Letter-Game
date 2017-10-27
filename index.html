@@ -7,15 +7,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+
+
 </head>
 <body>
-<h1>Hello, world!</h1>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<div class="container">
+
+
+<div style="background-color: #6f5499; color: white" class="jumbotron">
+    <h1>The Psychic Game</h1>
+
+</div>
+
+<h4>Guess what letter I'm thinking of . . .</h4>
+
+<ul class="nav nav-pills">
+
+    <li><a href="/" onclick="return false">Wins: <span id="wins" class="badge">0</span></a></li>
+    <br>
+    <br>
+
+    <li><a href="/" onclick="return false">Losses: <span id="losses" class="badge">0</span></a></li>
+    <br>
+    <br>
+
+    <li><a href="/" onclick="return false">Guesses Remaining: <span id="guessLeft" class="badge">9</span></a></li>
+    <br>
+    <br>
+
+    <li><a href="/" onclick="return false">Guessed so far: <span id="guessed" class="badge"></span></a></li>
+
+</ul>
+
+    <div id="image-div"></div>
+</div>
+
+
+
+<script>
+
+    var userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var computerChoices = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var wins = 0;
+    var losses = 0;
+    var guessed = [];
+    var guessLeft = 9;
+    var computerLetter = computerChoices[Math.floor(Math.random()*computerChoices.length)];
+    //var random = computerLetter;
+    var computerGuessed = computerLetter;
+
+    //console.log(computerLetter);
+
+
+    function init () {
+
+        // I had a freaking var right before computerLetter on the bottom line and that freaking killed me for hours!!
+        computerLetter = computerChoices[Math.floor(Math.random()*computerChoices.length)];
+        guessed = "";
+        guessLeft = 9;
+        //computerssed = computerLetter;
+
+    }
+
+  //  function isLetter(str) {
+  //      return str.length === 1 && str.match(userChoices);
+  //  }
+
+    //function update() {
+    //    $("#wins").text(wins);
+    //    $("#losses").text(losses);
+    //    $("#guessed").text(guessed);
+     //   $("#guessLeft").text(guessLeft);
+
+  //  }
+    //init();
+    document.onkeyup = function (event) {
+        var userGuess = event.key;
+       // guessed=[];
+        guessed = event.key;
+        $("#guessed").append(guessed);
+        //$("#guessed").appendChild(guessed);
+        //$("#guessed").text(guessed);
+
+        if(userGuess !== computerLetter){
+            guessLeft --;
+            //$("#guessed").text(guessed);
+            $("#guessLeft").text(guessLeft);
+            //guessed = "";
+            //guessLeft==0;
+
+            if(guessLeft === 0){
+                losses++;
+                $("#losses").text(losses);
+                guessLeft = 9;
+                $("#guessed").text("");
+                $("#image-div").append('<img src="assets/images/hangover1.gif" />');
+//            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+               ////////////// Got the code to work but can't seem to remove the images once a win or loss occurs ie after 10sec ////////////
+
+//            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                init();
+                alert(" you suck at guessing lol, but try again ");
+
+                //$("#image-div").append('<img src="assets/images/hangover1.gif" />');
+
+
+               // $("#image-div").html
+               // $("#guessLeft").text(guessdLeft);
+               // update();
+            }
+        } else if (userGuess === computerLetter){
+            wins++;
+            //init();
+           // var img = document.createElement("img");
+            //img.src = "https://giphy.com/gifs/animation-hangover-ken-jeong-GFX605Cqp7VFm";
+           $("#wins").text(wins);
+           $("#guessLeft").text(9);
+           $("#guessed").text("");
+           init();
+            //computerLetter();
+            alert("You Guessed what I was thinking, it was the letter " + ' " ' + userGuess + ' " ' + " you really are a Psychic.. ")
+           // update();
+           // var src = document.getElementById("#image-div");
+           // src.appendChild(img);
+           // $("#image-div").HTML("<img id='WIN' scr='assets/images/winner1.gif' />")
+            $("#image-div").append('<img src="assets/images/winner1.gif" />');
+
+        }
+    }
+
+
+//$(document).ready(function () {
+//    var userChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+//    var computerChoices = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+//    var computerLetter = computerChoices[Math.floor(Math.random()*computerChoices.length)];
+//    console.log(computerLetter);
+//    var computerGuessed = computerLetter;
+//    var wins = "0";
+//    var losses = "0";
+//    var guessLeft = "9";
+//    var guessed = " ";
+ //   var userGuess = event.key;
+
+ //   document.onkeyup = function (event) {
+
+ //       if (userGuess != computerLetter) {
+//            guessLeft--;
+//            target.guessed.html=(userGuess) //put the letter the user guessed here
+ //       }   else if (userGuess === computerLetter){
+ //           wins++;
+ //           target.wins.html = wins++
+//        } else if (guessLeft === 0) {
+//            losses++;
+//        }
+
+
+
+//    };
+
+
+//};
+
+
+
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </body>
 </html>
