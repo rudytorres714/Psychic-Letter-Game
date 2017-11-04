@@ -24,3 +24,11 @@
 label   {
     font-size: 20px;
 }
+
+button  {
+    font-size: 20px;
+    background-color: #6f5499;
+    color: white;
+    font-weight: bold;
+    border: outset;
+}
