@@ -1,0 +1,26 @@
+.headColor  {
+    background-color: #6f5499;
+    color: white;
+}
+
+#wins   {
+    font-size: 20px;
+    background-color: green;
+}
+#losses {
+    font-size: 20px;
+    background-color: red;
+}
+
+#guessLeft  {
+    font-size: 20px;
+    background-color: #6f5499;
+}
+
+#guessed    {
+    font-size: 20px;
+    background-color: cornflowerblue;
+}
+label   {
+    font-size: 20px;
+}
