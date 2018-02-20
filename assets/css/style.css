@@ -23,6 +23,7 @@
 }
 label   {
     font-size: 20px;
+    color: white;
 }
 
 button  {
@@ -31,4 +32,7 @@ button  {
     color: white;
     font-weight: bold;
     border: outset;
+}
+h3  {
+    color: white;
 }
